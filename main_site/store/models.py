@@ -1,4 +1,3 @@
-import pdb; pdb.set_trace()  # XXX BREAKPOINT
 from django.db import models
 
 
