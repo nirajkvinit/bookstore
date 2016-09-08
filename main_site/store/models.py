@@ -28,10 +28,10 @@ class Author(models.Model):
 class Book(models.Model):
     name = models.CharField(max_length=200)
     pub_date = models.DateField()
-    approve_date = models.DateField()
+    approve_date = models.DateField(auto_now_add=True)
     rating = models.FloatField(default=0.0)
-    genre = models.ForeignKey(Genre)
-    author = models.ForeignKey(Author)
+    genre = models.ForeignKey(Genre, on_delete=models.PROTECT)
+    author = models.ForeignKey(Author, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
