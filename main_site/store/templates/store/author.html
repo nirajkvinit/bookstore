@@ -1,0 +1,9 @@
+<html><head></head><body>
+		<h1>author's page</h1>
+        <h2>{{ author.name }}</h2>
+        <br>
+		{% for book in books %}
+			<h3>{{ book.name }}</h3>
+			<hr>
+		{% endfor %}
+</body></html>
