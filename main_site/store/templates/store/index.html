@@ -1,7 +1,8 @@
-<html><head></head><body>
+{% extends 'base.html' %}
+{% block store %}
 		<h1>Hello, this is my first template!</h1>
 		{% for book in books %}
 			<h3>{{ book.name }}</h3>
 			<hr>
 		{% endfor %}
-</body></html>
+{% endblock %}

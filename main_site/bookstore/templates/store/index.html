@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title></title>
+</head>
+<body>
+	<h1><a href="/index.html">BookStore</a></h1>
+	{% for book in books %}
+	<h6>{{ book.approve_date }}</h6>
+	<h5>{{ book.name }}</h5>
+	{% endfor %}
+</body>
+</html>

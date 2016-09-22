@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BookStore</title>
+        <!--<статика вот тут должна подгружаться>-->
+        <!--разобраться с бутстрапом-->
+    </head>
+    <body>
+        <div class="top-bar">
+            <section class="top-bar-section">
+                <ul class="right">
+                    {% if username %}
+                        <li><a href="loginsys/logout/">Logout ({{ username
+                                }})</a></li>
+                    {% else %}
+                        <li><a href="loginsys/login">Login</a></li>
+                    {% endif %}
+                </ul>
+            </section>
+        </div>
+        <div class="row">
+            <!--разобраться с блоками включаемыми-->
+            {% block store %}{% endblock %}
+            <!--{% block login %}{% endblock %}-->
+        </div>
+    </body>
+</html>

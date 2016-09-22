@@ -22,4 +22,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', 'store.views.index'),
     url(r'^store/', include('store.urls')),
+    url(r'^auth/', include('loginsys.urls')),
 ]
