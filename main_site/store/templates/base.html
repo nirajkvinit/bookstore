@@ -11,10 +11,9 @@
             <section class="top-bar-section">
                 <ul class="right">
                     {% if username %}
-                        <li><a href="loginsys/logout/">Logout ({{ username
-                                }})</a></li>
+                        <li><a href="/auth/logout/">Logout ({{ username }})</a></li>
                     {% else %}
-                        <li><a href="loginsys/login">Login</a></li>
+                        <li><a href="/auth/login">Login</a></li>
                     {% endif %}
                 </ul>
             </section>
@@ -22,7 +21,7 @@
         <div class="row">
             <!--разобраться с блоками включаемыми-->
             {% block store %}{% endblock %}
-            <!--{% block login %}{% endblock %}-->
+            {% block login %}{% endblock %}
         </div>
     </body>
 </html>

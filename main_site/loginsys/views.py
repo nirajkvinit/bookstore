@@ -16,14 +16,16 @@ def login(request):
             return redirect('/')
         else:
             params['login_error'] = 'User not found'
-            return render_to_response('loginsys.login.html', params)
+            return render_to_response('loginsys/login.html', params)
     else:
-        return render_to_response('loginsys.login.html', params)
+        return render_to_response('loginsys/login.html', params)
 
 
 def logout(request):
     auth.logout(request)
     return redirect('/')
+
+
 # def register(request):
     # params = {}
     # params.update(csrf(request))
