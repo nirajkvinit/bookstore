@@ -35,8 +35,7 @@ def register(request):
         if newuser_form.is_valid():
             newuser_form.save()
             newuser = auth.authenticate(username=newuser_form.cleaned_data['username'],
-                                        password=newuser_form.cleaned_data['password'],
-                                        email=newuser_form.cleaned_data['email'])
+                                        password=newuser_form.cleaned_data['password2'])
             auth.login(request, newuser)
             return redirect('/')
         else:
