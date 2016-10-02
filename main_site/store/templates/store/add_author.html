@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block add_content %}
+    <div class="large-offset-3 large-6 columns">
+        <form action="/store/add_author/" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <input class="button" type="submit" value="create author">
+        </form>
+    </div>
+{% endblock %}

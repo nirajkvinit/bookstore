@@ -1,6 +1,8 @@
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from .models import Book, Genre, Author
 from django.contrib import auth
+from .forms import BookForm, GenreForm, AuthorForm
+from django.core.context_processors import csrf
 
 
 def index(request):
@@ -35,3 +37,45 @@ def all_books(request):
     all_books = Book.objects.order_by('-approve_date')
     # реализовать пагинацию // realize pagination
     return render_to_response('store/index.html', {'books': all_books})
+
+
+def add_book(request):
+    params = {}
+    params.update(csrf(request))
+    params['form'] = BookForm()
+    if request.POST:
+        newbook_form = BookForm(request.POST)
+        if newbook_form.is_valid():
+            newbook_form.save()
+            return redirect('/')
+        else:
+            params['form'] = newbook_form
+    return render_to_response('store/add_book.html', params)
+
+
+def add_genre(request):
+    params = {}
+    params.update(csrf(request))
+    params['form'] = GenreForm
+    if request.POST:
+        newgenre_form = GenreForm(request.POST)
+        if newgenre_form.is_valid():
+            newgenre_form.save()
+            return redirect('/')
+        else:
+            params['form'] = newgenre_form
+    return render_to_response('store/add_genre.html', params)
+
+
+def add_author(request):
+    params = {}
+    params.update(csrf(request))
+    params['form'] = AuthorForm
+    if request.POST:
+        newauthor_form = AuthorForm(request.POST)
+        if newauthor_form.is_valid():
+            newauthor_form.save()
+            return redirect('/')
+        else:
+            params['form'] = newauthor_form
+    return render_to_response('store/add_author.html', params)
