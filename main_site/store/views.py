@@ -79,3 +79,12 @@ def add_author(request):
         else:
             params['form'] = newauthor_form
     return render_to_response('store/add_author.html', params)
+
+
+def add_vote(request, book_id, vote):
+    try:
+        current_book = Book.objects.get(id=book_id)
+        current_book.upd_rating(int(vote))
+        return redirect("/store/book/" + book_id + "")
+    except:
+        return redirect('oops/')
