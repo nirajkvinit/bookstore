@@ -3,7 +3,7 @@
 {% block store %}
 		<h1>Last 10 books on BookStore</h1>
 		{% for book in books %}
-			<h3>{{ book.name }}</h3>
+            <h3><a href="/store/book/{{ book.id }}">{{ book.name }}</a></h3>
 			<hr>
 		{% endfor %}
 {% endblock %}

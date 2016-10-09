@@ -16,7 +16,10 @@ def book_by_id(request, book_id):
     current_book = Book.objects.get(id=book_id)
     return render_to_response('store/book.html',
                               {'book': current_book,
-                               'username': auth.get_user(request).username})
+                               'username': auth.get_user(request).username,
+                               'votes_variants': range(1, 6)
+                               }
+                              )
 
 
 def books_by_genre(request, genre_id):

@@ -44,6 +44,7 @@ class Book(models.Model):
             print('need to update')
             new_rating = (self.rating * self.votes + new_vote)/(self.votes + 1)
             self.votes += 1
+            print("now vote is incremented")
             self.rating = new_rating
             self.save(update_fields=['rating', 'votes'])
             print("UPDATED")

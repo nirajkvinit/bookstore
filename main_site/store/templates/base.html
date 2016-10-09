@@ -8,7 +8,10 @@
         <link rel="stylesheet" type="text/css" href="{% static "css/foundation.css" %}">
     </head>
     <body>
-        <div class="top-bar">
+        <script src="{% static "js/vendor/jquery.js" %}"></script>
+        <script src="{% static "js/vendor/foundation.js" %}"></script>
+        <script src="{% static "js/vendor/foundation.min.js" %}"></script>
+        <nav class="top-bar foundation-bar" data-topbar>
             <section class="top-bar-section">
                 <ul class="right">
                     {% if username %}
@@ -17,8 +20,11 @@
                         <li><a href="/auth/login">Login</a></li>
                     {% endif %}
                 </ul>
+                <ul class="left">
+                    <li><a href="/">Homepage</a></li>
+                </ul>
             </section>
-        </div>
+        </nav>
         <div class="row">
             <!--разобраться с блоками включаемыми-->
             {% block store %}{% endblock %}
