@@ -41,3 +41,7 @@ def register(request):
         else:
             params['form'] = newuser_form
     return render_to_response('loginsys/register.html', params)
+
+
+def login_required(request):
+    return render_to_response('loginsys/login_required.html')

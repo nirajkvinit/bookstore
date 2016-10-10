@@ -27,8 +27,8 @@ class Author(models.Model):
 
 class Book(models.Model):
     name = models.CharField(max_length=200)
-    pub_date = models.DateField()
-    approve_date = models.DateField(auto_now_add=True)
+    pub_date = models.DateField()           # publication date
+    approve_date = models.DateField(auto_now_add=True)      # date of applying book on this app
     rating = models.FloatField(default=0.0)
     votes = models.IntegerField(default=0)
     genre = models.ForeignKey(Genre, on_delete=models.PROTECT)
