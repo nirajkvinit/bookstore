@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.all_books),
     url(r'^book/(?P<book_id>[0-9]+)$', views.book_by_id),
+    url(r'^book/(?P<book_id>[0-9]+)/edit_book/$', views.edit_book),
     url(r'^book/(?P<book_id>[0-9]+)/add_vote/(?P<vote>[1-5]{1})$', views.add_vote),
     url(r'^add_book/$', views.add_book),
     url(r'^add_genre/$', views.add_genre),

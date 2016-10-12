@@ -57,6 +57,8 @@ def add_book(request):
     params = {}
     params.update(csrf(request))
     params['form'] = BookForm()
+    params['action'] = "/store/add_book/"
+    params['button_value'] = "Create Book"
     params['username'] = auth.get_user(request).username
     if request.POST:
         newbook_form = BookForm(request.POST)
@@ -65,13 +67,15 @@ def add_book(request):
             return redirect('/')
         else:
             params['form'] = newbook_form
-    return render_to_response('store/add_book.html', params)
+    return render_to_response('store/add_edit_form.html', params)
 
 
 def add_genre(request):
     params = {}
     params.update(csrf(request))
     params['form'] = GenreForm
+    params['action'] = "/store/add_genre/"
+    params['button_value'] = "Create Genre"
     params['username'] = auth.get_user(request).username
     if request.POST:
         newgenre_form = GenreForm(request.POST)
@@ -80,13 +84,15 @@ def add_genre(request):
             return redirect('/')
         else:
             params['form'] = newgenre_form
-    return render_to_response('store/add_genre.html', params)
+    return render_to_response('store/add_edit_form.html', params)
 
 
 def add_author(request):
     params = {}
     params.update(csrf(request))
     params['form'] = AuthorForm
+    params['action'] = "/store/add_author/"
+    params['button_value'] = "Create Author"
     params['username'] = auth.get_user(request).username
     if request.POST:
         newauthor_form = AuthorForm(request.POST)
@@ -95,7 +101,7 @@ def add_author(request):
             return redirect('/')
         else:
             params['form'] = newauthor_form
-    return render_to_response('store/add_author.html', params)
+    return render_to_response('store/add_edit_form.html', params)
 
 
 def add_vote(request, book_id, vote):
@@ -110,5 +116,20 @@ def add_vote(request, book_id, vote):
         return redirect('/login_required/')
 
 
-# def edit_book(request, book_id):
-    # params = {'book' = Book.object.get(id=book_id)
+def edit_book(request, book_id):
+    params = {}
+    params.update(csrf(request))
+    params['book'] = Book.objects.get(id=book_id)
+    params['form'] = BookForm(instance=params['book'])
+    params['action'] = "/store/book/" + book_id + "/edit_book/"
+    params['button_value'] = "Update Book"
+    params['username'] = auth.get_user(request).username
+    if request.POST:
+        editbook_form = BookForm(request.POST, instance=params['book'])
+        if editbook_form.is_valid():
+            editbook_form.save()
+            return redirect("/store/book/" + book_id + "")
+        else:
+            params['form'] = editbook_form
+    else:
+        return render_to_response('store/add_edit_form.html', params)

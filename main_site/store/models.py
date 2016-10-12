@@ -41,10 +41,10 @@ class Book(models.Model):
         print("Start method UPD_RATING")
         print('new vote', new_vote)
         if new_vote in range(1, 6):
-            print('need to update')
+            # print('need to update')
             new_rating = (self.rating * self.votes + new_vote)/(self.votes + 1)
             self.votes += 1
-            print("now vote is incremented")
+            # print("now vote is incremented")
             self.rating = new_rating
             self.save(update_fields=['rating', 'votes'])
             print("UPDATED")
