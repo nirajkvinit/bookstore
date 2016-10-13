@@ -133,3 +133,41 @@ def edit_book(request, book_id):
             params['form'] = editbook_form
     else:
         return render_to_response('store/add_edit_form.html', params)
+
+
+def edit_author(request, author_id):
+    params = {}
+    params.update(csrf(request))
+    params['author'] = Author.objects.get(id=author_id)
+    params['form'] = AuthorForm(instance=params['author'])
+    params['action'] = "/store/author/" + author_id + "/edit_author/"
+    params['button_value'] = "Update Author"
+    params['username'] = auth.get_user(request).username
+    if request.POST:
+        editauthor_form = AuthorForm(request.POST, instance=params['author'])
+        if editauthor_form.is_valid():
+            editauthor_form.save()
+            return redirect("/store/author/" + author_id + "")
+        else:
+            params['form'] = editauthor_form
+    else:
+        return render_to_response('store/add_edit_form.html', params)
+
+
+def edit_genre(request, genre_id):
+    params = {}
+    params.update(csrf(request))
+    params['genre'] = Genre.objects.get(id=genre_id)
+    params['form'] = GenreForm(instance=params['genre'])
+    params['action'] = "/store/genre/" + genre_id + "/edit_genre/"
+    params['button_value'] = "Update Genre"
+    params['username'] = auth.get_user(request).username
+    if request.POST:
+        editgenre_form = GenreForm(request.POST, instance=params['genre'])
+        if editgenre_form.is_valid():
+            editgenre_form.save()
+            return redirect("/store/genre/" + genre_id + "")
+        else:
+            params['form'] = editgenre_form
+    else:
+        return render_to_response('store/add_edit_form.html', params)
