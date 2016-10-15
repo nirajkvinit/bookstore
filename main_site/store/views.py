@@ -3,6 +3,8 @@ from .models import Book, Genre, Author
 from django.contrib import auth
 from .forms import BookForm, GenreForm, AuthorForm
 from django.core.context_processors import csrf
+from django.views.generic.edit import DeleteView
+# from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -164,3 +166,15 @@ def edit_genre(request, genre_id):
             params['form'] = editgenre_form
     else:
         return render_to_response('store/add_edit_form.html', params)
+
+
+class DeleteBook(DeleteView):
+    model = Book
+    template_name = 'store/book_del_conf.html'
+    success_url = '/store/'
+
+
+# class DeleteGenre(DeleteView):
+    # model = Genre
+    # template_name = 'store/book_del_conf.html'
+    # success_url = '/store/'
