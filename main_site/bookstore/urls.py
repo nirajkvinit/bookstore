@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^$', 'store.views.index'),
     url(r'^store/', include('store.urls')),
     url(r'^auth/', include('loginsys.urls')),
-    url(r'^login_required/', 'loginsys.views.login_required'),
+    url(r'^login_need/', 'loginsys.views.login_need'),
 ]

@@ -1,7 +1,8 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import render_to_response, redirect, render
 from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
 
 
 def login(request):
@@ -22,6 +23,8 @@ def login(request):
 
 
 def logout(request):
+    # if request.user:
+        # print(request.user, request.user.id)
     auth.logout(request)
     return redirect('/')
 
@@ -43,5 +46,13 @@ def register(request):
     return render_to_response('loginsys/register.html', params)
 
 
-def login_required(request):
+def login_need(request):
     return render_to_response('loginsys/login_required.html')
+
+
+@login_required
+def user_page(request):
+    # params = {}
+    # params['user'] = User.objects.get(id=request.user.id)
+    # переделать ответ под render()
+    return render(request, template_name='loginsys/userpage.html')

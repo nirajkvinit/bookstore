@@ -4,6 +4,7 @@ from django.contrib import auth
 from .forms import BookForm, GenreForm, AuthorForm
 from django.core.context_processors import csrf
 from django.views.generic.edit import DeleteView
+from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.decorators import login_required
 
 
@@ -48,6 +49,7 @@ def all_books(request):
     return render_to_response('store/store.html', params)
 
 
+@login_required
 def add_book(request):
     params = {}
     params.update(csrf(request))
@@ -65,6 +67,7 @@ def add_book(request):
     return render_to_response('store/add_edit_form.html', params)
 
 
+@login_required
 def add_genre(request):
     params = {}
     params.update(csrf(request))
@@ -82,6 +85,7 @@ def add_genre(request):
     return render_to_response('store/add_edit_form.html', params)
 
 
+@login_required
 def add_author(request):
     params = {}
     params.update(csrf(request))
@@ -99,6 +103,7 @@ def add_author(request):
     return render_to_response('store/add_edit_form.html', params)
 
 
+@login_required
 def add_vote(request, book_id, vote):
     if request.user.is_authenticated():
         try:
@@ -111,6 +116,7 @@ def add_vote(request, book_id, vote):
         return redirect('/login_required/')
 
 
+@login_required
 def edit_book(request, book_id):
     params = {}
     params.update(csrf(request))
@@ -130,6 +136,7 @@ def edit_book(request, book_id):
         return render_to_response('store/add_edit_form.html', params)
 
 
+@login_required
 def edit_author(request, author_id):
     params = {}
     params.update(csrf(request))
@@ -149,6 +156,7 @@ def edit_author(request, author_id):
         return render_to_response('store/add_edit_form.html', params)
 
 
+@login_required
 def edit_genre(request, genre_id):
     params = {}
     params.update(csrf(request))
@@ -168,6 +176,7 @@ def edit_genre(request, genre_id):
         return render_to_response('store/add_edit_form.html', params)
 
 
+# добавить требование быть залогиненным
 class DeleteBook(DeleteView):
     model = Book
     template_name = 'store/book_del_conf.html'
