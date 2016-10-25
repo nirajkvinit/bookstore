@@ -5,6 +5,7 @@ from .forms import BookForm, GenreForm, AuthorForm
 from django.core.context_processors import csrf
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 # from django.contrib.auth.decorators import login_required
 
 
@@ -178,6 +179,9 @@ def edit_genre(request, genre_id):
 
 # добавить требование быть залогиненным
 class DeleteBook(DeleteView):
+    @method_decorator(login_required())
+    def dispatch(self, request, *args, **kwargs):
+        return super(DeleteBook, self).dispatch(request, *args, **kwargs)
     model = Book
     template_name = 'store/book_del_conf.html'
     success_url = '/store/'
