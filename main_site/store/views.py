@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, redirect
+from django.shortcuts import redirect, render
 from .models import Book, Genre, Author
 from django.contrib import auth
 from .forms import BookForm, GenreForm, AuthorForm
@@ -6,7 +6,6 @@ from django.core.context_processors import csrf
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-# from django.contrib.auth.decorators import login_required
 
 
 def index(request):
@@ -14,32 +13,28 @@ def index(request):
     params['books'] = Book.objects.order_by('-approve_date')[:10]
     params['authors'] = Author.objects.all()
     params['genres'] = Genre.objects.all()
-    params['username'] = auth.get_user(request).username
-    return render_to_response('store/index.html', params)
+    return render(request, template_name='store/index.html', context=params)
 
 
 def book_by_id(request, book_id):
     params = {}
     params['book'] = Book.objects.select_related().get(id=book_id)
-    params['username'] = auth.get_user(request).username
     params['votes_variants'] = range(1, 6)
-    return render_to_response('store/book.html', params)
+    return render(request, template_name='store/book.html', context=params)
 
 
 def books_by_genre(request, genre_id):
     params = {}
     params['genre'] = Genre.objects.get(id=genre_id)
     params['books'] = Book.objects.filter(genre=genre_id)
-    params['username'] = auth.get_user(request).username
-    return render_to_response('store/genre.html', params)
+    return render(request, template_name='store/genre.html', context=params)
 
 
 def books_by_author(request, author_id):
     params = {}
     params['author'] = Author.objects.get(id=author_id)
     params['books'] = Book.objects.filter(author=author_id)
-    params['username'] = auth.get_user(request).username
-    return render_to_response('store/author.html', params)
+    return render(request, template_name='store/author.html', context=params)
 
 
 def all_books(request):
@@ -47,7 +42,7 @@ def all_books(request):
     params['books'] = Book.objects.order_by('-approve_date')
     params['username'] = auth.get_user(request).username
     # реализовать пагинацию // realize pagination
-    return render_to_response('store/store.html', params)
+    return render(request, template_name='store/store.html', context=params)
 
 
 @login_required
@@ -57,7 +52,6 @@ def add_book(request):
     params['form'] = BookForm()
     params['action'] = "/store/add_book/"
     params['button_value'] = "Create Book"
-    params['username'] = auth.get_user(request).username
     if request.POST:
         newbook_form = BookForm(request.POST)
         if newbook_form.is_valid():
@@ -65,7 +59,7 @@ def add_book(request):
             return redirect('/')
         else:
             params['form'] = newbook_form
-    return render_to_response('store/add_edit_form.html', params)
+    return render(request, template_name='store/add_edit_form.html', context=params)
 
 
 @login_required
@@ -75,7 +69,6 @@ def add_genre(request):
     params['form'] = GenreForm
     params['action'] = "/store/add_genre/"
     params['button_value'] = "Create Genre"
-    params['username'] = auth.get_user(request).username
     if request.POST:
         newgenre_form = GenreForm(request.POST)
         if newgenre_form.is_valid():
@@ -83,7 +76,7 @@ def add_genre(request):
             return redirect('/')
         else:
             params['form'] = newgenre_form
-    return render_to_response('store/add_edit_form.html', params)
+    return render(request, template_name='store/add_edit_form.html', context=params)
 
 
 @login_required
@@ -93,7 +86,6 @@ def add_author(request):
     params['form'] = AuthorForm
     params['action'] = "/store/add_author/"
     params['button_value'] = "Create Author"
-    params['username'] = auth.get_user(request).username
     if request.POST:
         newauthor_form = AuthorForm(request.POST)
         if newauthor_form.is_valid():
@@ -101,7 +93,7 @@ def add_author(request):
             return redirect('/')
         else:
             params['form'] = newauthor_form
-    return render_to_response('store/add_edit_form.html', params)
+    return render(request, template_name='store/add_edit_form.html', context=params)
 
 
 @login_required
@@ -125,7 +117,6 @@ def edit_book(request, book_id):
     params['form'] = BookForm(instance=params['book'])
     params['action'] = "/store/book/" + book_id + "/edit_book/"
     params['button_value'] = "Update Book"
-    params['username'] = auth.get_user(request).username
     if request.POST:
         editbook_form = BookForm(request.POST, instance=params['book'])
         if editbook_form.is_valid():
@@ -134,7 +125,7 @@ def edit_book(request, book_id):
         else:
             params['form'] = editbook_form
     else:
-        return render_to_response('store/add_edit_form.html', params)
+        return render(request, template_name='store/add_edit_form.html', context=params)
 
 
 @login_required
@@ -145,7 +136,6 @@ def edit_author(request, author_id):
     params['form'] = AuthorForm(instance=params['author'])
     params['action'] = "/store/author/" + author_id + "/edit_author/"
     params['button_value'] = "Update Author"
-    params['username'] = auth.get_user(request).username
     if request.POST:
         editauthor_form = AuthorForm(request.POST, instance=params['author'])
         if editauthor_form.is_valid():
@@ -154,7 +144,7 @@ def edit_author(request, author_id):
         else:
             params['form'] = editauthor_form
     else:
-        return render_to_response('store/add_edit_form.html', params)
+        return render(request, template_name='store/add_edit_form.html', context=params)
 
 
 @login_required
@@ -165,7 +155,6 @@ def edit_genre(request, genre_id):
     params['form'] = GenreForm(instance=params['genre'])
     params['action'] = "/store/genre/" + genre_id + "/edit_genre/"
     params['button_value'] = "Update Genre"
-    params['username'] = auth.get_user(request).username
     if request.POST:
         editgenre_form = GenreForm(request.POST, instance=params['genre'])
         if editgenre_form.is_valid():
@@ -174,10 +163,9 @@ def edit_genre(request, genre_id):
         else:
             params['form'] = editgenre_form
     else:
-        return render_to_response('store/add_edit_form.html', params)
+        return render(request, template_name='store/add_edit_form.html', context=params)
 
 
-# добавить требование быть залогиненным
 class DeleteBook(DeleteView):
     @method_decorator(login_required())
     def dispatch(self, request, *args, **kwargs):

@@ -14,8 +14,8 @@
         <nav class="top-bar foundation-bar" data-topbar>
             <section class="top-bar-section">
                 <ul class="right">
-                    {% if username %}
-                        <li><a href="/auth/logout/">Logout ({{ username }})</a></li>
+                    {% if user.username %}
+                        <li><a href="/auth/logout/">Logout ({{ user.username }})</a></li>
                         <li><a href={% url "user_page" %}>Personal Page</a></li>
                     {% else %}
                         <li><a href="/auth/login">Login</a></li>

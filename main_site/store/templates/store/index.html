@@ -1,9 +1,26 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
 {% block store %}
-		<h1>Last 10 books on BookStore</h1>
+<h1>Welcome to the BookStore!</h1><br>
+        <div class="large-4 columns">
+            <h3>Last 10 books</h3><br>
 		{% for book in books %}
-            <h3><a href="/store/book/{{ book.id }}">{{ book.name }}</a></h3>
+            <h4><a href="/store/book/{{ book.id }}">{{ book.name }}</a></h4>
 			<hr>
 		{% endfor %}
+        </div>
+        <div class="large-4 columns">
+            <h3>Authors</h3><br>
+		{% for author in authors %}
+            <h4><a href="/store/author/{{ author.id }}">{{ author.name }}</a></h4>
+			<hr>
+		{% endfor %}
+        </div>
+        <div class="large-4 columns">
+            <h3>Genres</h3><br>
+		{% for genre in genres %}
+            <h4><a href="/store/genre/{{ genre.id }}">{{ genre.name }}</a></h4>
+			<hr>
+		{% endfor %}
+        </div>
 {% endblock %}
