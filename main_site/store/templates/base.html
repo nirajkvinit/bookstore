@@ -11,9 +11,10 @@
         <script src="{% static "js/vendor/jquery.js" %}"></script>
         <script src="{% static "js/vendor/foundation.js" %}"></script>
         <script src="{% static "js/vendor/foundation.min.js" %}"></script>
-        <nav class="top-bar foundation-bar" data-topbar>
-            <section class="top-bar-section">
-                <ul class="right">
+        <div class="top-bar" data-topbar>
+            <div class="top-bar-left">
+                <ul class="dropdown menu" data-dropdown-menu>
+                    <li class="menu-text"><a href="/">Homepage</a></li>
                     {% if user.username %}
                         <li><a href="/auth/logout/">Logout ({{ user.username }})</a></li>
                         <li><a href={% url "user_page" %}>Personal Page</a></li>
@@ -21,11 +22,8 @@
                         <li><a href="/auth/login">Login</a></li>
                     {% endif %}
                 </ul>
-                <ul class="left">
-                    <li><a href="/">Homepage</a></li>
-                </ul>
-            </section>
-        </nav>
+            </div>
+        </div>
         <div class="row">
             <!--разобраться с блоками включаемыми-->
             {% block store %}{% endblock %}

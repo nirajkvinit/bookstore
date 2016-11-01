@@ -59,7 +59,9 @@ def add_book(request):
             return redirect('/')
         else:
             params['form'] = newbook_form
-    return render(request, template_name='store/add_edit_form.html', context=params)
+    return render(request,
+                  template_name='store/add_edit_form.html',
+                  context=params)
 
 
 @login_required
@@ -76,7 +78,9 @@ def add_genre(request):
             return redirect('/')
         else:
             params['form'] = newgenre_form
-    return render(request, template_name='store/add_edit_form.html', context=params)
+    return render(request,
+                  template_name='store/add_edit_form.html',
+                  context=params)
 
 
 @login_required
@@ -93,7 +97,9 @@ def add_author(request):
             return redirect('/')
         else:
             params['form'] = newauthor_form
-    return render(request, template_name='store/add_edit_form.html', context=params)
+    return render(request,
+                  template_name='store/add_edit_form.html',
+                  context=params)
 
 
 @login_required
@@ -125,7 +131,9 @@ def edit_book(request, book_id):
         else:
             params['form'] = editbook_form
     else:
-        return render(request, template_name='store/add_edit_form.html', context=params)
+        return render(request,
+                      template_name='store/add_edit_form.html',
+                      context=params)
 
 
 @login_required
@@ -144,7 +152,9 @@ def edit_author(request, author_id):
         else:
             params['form'] = editauthor_form
     else:
-        return render(request, template_name='store/add_edit_form.html', context=params)
+        return render(request,
+                      template_name='store/add_edit_form.html',
+                      context=params)
 
 
 @login_required
@@ -163,7 +173,9 @@ def edit_genre(request, genre_id):
         else:
             params['form'] = editgenre_form
     else:
-        return render(request, template_name='store/add_edit_form.html', context=params)
+        return render(request,
+                      template_name='store/add_edit_form.html',
+                      context=params)
 
 
 class DeleteBook(DeleteView):
