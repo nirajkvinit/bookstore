@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^store/', include('store.urls')),
     url(r'^auth/', include('loginsys.urls')),
     url(r'^login_need/', 'loginsys.views.login_need'),
+    url(r'^ratings/', include('star_ratings.urls', namespace='ratings', app_name='ratings'))
 ]

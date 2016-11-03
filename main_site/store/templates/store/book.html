@@ -1,17 +1,12 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load ratings %}
     <h1>Book's page</h1>
         <h3>{{ book.name }}</h3>
         <h3>{{ book.approve_date }}</h3>
-        <h3>Rating: {{ book.rating }}</h3>
-        <h3>Votes: {{ book.votes }}</h3>
         <h3>Genre: <a href="/store/genre/{{ book.genre.id }}">{{ book.genre }}</a></h3>
         <h3>Author: <a href="/store/author/{{ book.author.id }}">{{ book.author }}</a></h3>
-        <ul>
-        {% for i in votes_variants %}
-            <li><a href="/store/book/{{ book.id }}/add_vote/{{ i }}">Vote +{{ i }}</a></li>
-        {% endfor %}
-        </ul>
         <h3><a href="/store/book/{{ book.id }}/delete_book/">Delete Book</a></h3>
         <hr>
+        {% ratings book %}
 {% endblock %}

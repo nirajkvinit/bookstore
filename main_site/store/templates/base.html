@@ -2,10 +2,12 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <meta charset="UTF-8">
         <title>BookStore</title>
         <!--<статика вот тут должна подгружаться>-->
         <!--разобраться с бутстрапом-->
         <link rel="stylesheet" type="text/css" href="{% static "css/foundation.css" %}">
+        <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
     </head>
     <body>
         <script src="{% static "js/vendor/jquery.js" %}"></script>
@@ -31,5 +33,6 @@
             {% block content %}{% endblock %}
             {% block add_content %}{% endblock %}
         </div>
+        <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.js' %}"></script>
     </body>
 </html>

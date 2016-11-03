@@ -41,7 +41,7 @@ def all_books(request):
     params = {}
     params['books'] = Book.objects.order_by('-approve_date')
     params['username'] = auth.get_user(request).username
-    # реализовать пагинацию // realize pagination
+    # реализовать пагинацию // realize pagination через CBV
     return render(request, template_name='store/store.html', context=params)
 
 
@@ -102,17 +102,17 @@ def add_author(request):
                   context=params)
 
 
-@login_required
-def add_vote(request, book_id, vote):
-    if request.user.is_authenticated():
-        try:
-            current_book = Book.objects.get(id=book_id)
-            current_book.upd_rating(int(vote))
-            return redirect("/store/book/" + book_id + "")
-        except:
-            return redirect('/oops/')
-    else:
-        return redirect('/login_required/')
+# @login_required
+# def add_vote(request, book_id, vote):
+    # if request.user.is_authenticated():
+        # try:
+            # current_book = Book.objects.get(id=book_id)
+            # current_book.upd_rating(int(vote))
+            # return redirect("/store/book/" + book_id + "")
+        # except:
+            # return redirect('/oops/')
+    # else:
+        # return redirect('/login_required/')
 
 
 @login_required
