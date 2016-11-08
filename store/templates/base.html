@@ -13,16 +13,21 @@
         <script src="{% static "js/vendor/jquery.js" %}"></script>
         <script src="{% static "js/vendor/foundation.js" %}"></script>
         <script src="{% static "js/vendor/foundation.min.js" %}"></script>
-        <div class="top-bar" data-topbar>
+        <div class="top-bar" >
             <div class="top-bar-left">
-                <ul class="dropdown menu" data-dropdown-menu>
-                    <li class="menu-text"><a href="/">Homepage</a></li>
+                <ul class="menu" >
+                    <li class="menu-button"><a href="{% url "mainpage" %}">Homepage</a></li>
                     {% if user.username %}
-                        <li><a href="/auth/logout/">Logout ({{ user.username }})</a></li>
+                        <li><a href="{% url "logout" %}">Logout ({{ user.username }})</a></li>
                         <li><a href={% url "user_page" %}>Personal Page</a></li>
                     {% else %}
-                        <li><a href="/auth/login">Login</a></li>
+                    <li><a href="{% url "login" %}">Login</a></li>
                     {% endif %}
+                </ul>
+            </div>
+            <div class="tob-bar-right">
+                <ul class="menu">
+                    <li class="menu-button"><a href="{% url "store" %}">All Books</a></li>
                 </ul>
             </div>
         </div>
