@@ -19,7 +19,7 @@
                     <li class="menu-button"><a href="{% url "mainpage" %}">Homepage</a></li>
                     {% if user.username %}
                         <li><a href="{% url "logout" %}">Logout ({{ user.username }})</a></li>
-                        <li><a href={% url "user_page" %}>Personal Page</a></li>
+                        <li><a href="{% url "user_page" %}">Personal Page</a></li>
                     {% else %}
                     <li><a href="{% url "login" %}">Login</a></li>
                     {% endif %}
