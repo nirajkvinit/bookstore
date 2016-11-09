@@ -3,7 +3,7 @@
 {% block store %}
     <h1>All books</h1>
 		{% for book in books %}
-            <h3><a href="/store/book/{{ book.id }}">{{ book.name }}</a></h3>
+        <h3><a href="{% url "book_by_id" book.id %}">{{ book.name }}</a></h3>
 			<hr>
 		{% endfor %}
 {% endblock %}
