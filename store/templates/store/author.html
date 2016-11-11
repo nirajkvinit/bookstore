@@ -4,7 +4,8 @@
     <h2>{{ author.name }}</h2>
     <br>
     {% for book in books %}
-            <h3><a href="/store/book/{{ book.id }}">{{ book.name }}</a></h3>
+        <h3><a href="{% url "book_by_id" book.id %}">{{ book.name }}</a></h3>
         <hr>
     {% endfor %}
+    <h6><a href="{% url "edit_author" author.id %}">Edit author</a></h6>
 {% endblock %}
