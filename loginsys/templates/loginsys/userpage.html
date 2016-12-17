@@ -2,4 +2,11 @@
 {% load staticfiles %}
 {% block login %}
 <h2>Hello, {{ user.username }}!</h2>
+<br>
+<h2>This is your favorite books:</h2>
+{% for book in favorite_books %}
+    <h3><a href="{% url "book_by_id" book.id %}">{{ book.name }}</a></h3>
+    <hr>
+{% endfor %}
+
 {% endblock %}

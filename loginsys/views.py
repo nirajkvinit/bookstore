@@ -3,6 +3,7 @@ from django.contrib import auth
 from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 
 def login(request):
@@ -52,7 +53,7 @@ def login_need(request):
 
 @login_required
 def user_page(request):
-    # params = {}
-    # params['user'] = User.objects.get(id=request.user.id)
-    # переделать ответ под render()
-    return render(request, template_name='loginsys/userpage.html')
+    params = {}
+    current_user = User.objects.get(id=auth.get_user(request).id)
+    params['favorite_books'] = current_user.book_set.all()
+    return render(request, template_name='loginsys/userpage.html', context=params)

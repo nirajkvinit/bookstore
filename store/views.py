@@ -6,6 +6,7 @@ from django.core.context_processors import csrf
 from django.views.generic.edit import DeleteView
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.contrib.auth.models import User
 
 
 def index(request):
@@ -102,19 +103,6 @@ def add_author(request):
                   context=params)
 
 
-# @login_required
-# def add_vote(request, book_id, vote):
-    # if request.user.is_authenticated():
-        # try:
-            # current_book = Book.objects.get(id=book_id)
-            # current_book.upd_rating(int(vote))
-            # return redirect("/store/book/" + book_id + "")
-        # except:
-            # return redirect('/oops/')
-    # else:
-        # return redirect('/login_required/')
-
-
 @login_required
 def edit_book(request, book_id):
     params = {}
@@ -178,6 +166,19 @@ def edit_genre(request, genre_id):
                       context=params)
 
 
+@login_required
+def add_book_to_favorites(request, book_id):
+    current_book = Book.objects.get(id=book_id)
+    if request.user.is_authenticated():
+        try:
+            current_user = User.objects.get(id=auth.get_user(request).id)
+            current_book.favorites_by.add(current_user)
+            current_book.save()
+            return redirect("/store/book/" + book_id + "")
+        except:
+            return redirect('/oops/')
+
+
 class DeleteBook(DeleteView):
     @method_decorator(login_required())
     def dispatch(self, request, *args, **kwargs):
@@ -185,9 +186,3 @@ class DeleteBook(DeleteView):
     model = Book
     template_name = 'store/book_del_conf.html'
     success_url = '/store/'
-
-
-# class DeleteGenre(DeleteView):
-    # model = Genre
-    # template_name = 'store/book_del_conf.html'
-    # success_url = '/store/'
