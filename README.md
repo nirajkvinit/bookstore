@@ -3,4 +3,5 @@
 <ul>
 <li>django 1.9</li>
 <li>python 3.5</li>
+<li>see requirements.txt for more info</li>
 </ul>
