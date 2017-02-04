@@ -27,7 +27,7 @@ SECRET_KEY = '*w4f&0lpt7m#t_kvzck60u0f!+k$w*o)imo^d%_vcbo5(ejv=1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['djbookstore.herokuapp.com', ]
 
 
 # Application definition
