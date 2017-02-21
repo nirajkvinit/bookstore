@@ -55,5 +55,5 @@ def login_need(request):
 def user_page(request):
     params = {}
     current_user = User.objects.get(id=auth.get_user(request).id)
-    params['favorite_books'] = current_user.book_set.all()
+    params['favorite_books'] = current_user.profile.favorites.all()
     return render(request, template_name='loginsys/userpage.html', context=params)
