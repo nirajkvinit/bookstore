@@ -32,7 +32,6 @@ class Book(models.Model):
     approve_date = models.DateTimeField(auto_now_add=True)      # date of applying book on this app
     genre = models.ForeignKey(Genre, on_delete=models.PROTECT)
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
-    favorites_by = models.ManyToManyField(User)
 
     def __str__(self):
         return self.name

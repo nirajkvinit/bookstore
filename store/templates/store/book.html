@@ -2,15 +2,17 @@
 {% block content %}
 {% load ratings %}
     <h1>Book's page</h1>
-        <h3>{{ book.name }}</h3>
-        {% if book in user.profile.favorites.all %}<h6>Favorited!</h6>{% else %}
+    <h3>{{ book.name }}</h3>
+    {% if book in user.profile.favorites.all %}
+        <h6><a href="{% url "remove_from_favorites" book.id%}">Favorited!</a></h6>
+    {% else %}
         <h6><a href="{% url "add_to_favorites" book.id%}">Add book to favorites</a></h6>
-        {% endif %}
-        <h3>{{ book.approve_date }}</h3>
-        <h3>Genre: <a href="{% url "books_by_genre" book.genre.id %}">{{ book.genre }}</a></h3>
-        <h3>Author: <a href="{% url "books_by_author" book.author.id %}">{{ book.author }}</a></h3>
-        <h6><a href="{% url "edit_book" book.id %}">Edit book</a></h6>
-        <h6><a href="{% url "book_delete" book.id %}">Delete Book</a></h3>
-        <hr>
-        {% ratings book %}
+    {% endif %}
+    <h3>{{ book.approve_date }}</h3>
+    <h3>Genre: <a href="{% url "books_by_genre" book.genre.id %}">{{ book.genre }}</a></h3>
+    <h3>Author: <a href="{% url "books_by_author" book.author.id %}">{{ book.author }}</a></h3>
+    <h6><a href="{% url "edit_book" book.id %}">Edit book</a></h6>
+    <h6><a href="{% url "book_delete" book.id %}">Delete Book</a></h3>
+    <hr>
+    {% ratings book %}
 {% endblock %}

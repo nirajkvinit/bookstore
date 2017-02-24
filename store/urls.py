@@ -15,4 +15,5 @@ urlpatterns = [
     url(r'^author/(?P<author_id>[0-9]+)$', views.books_by_author, name='books_by_author'),
     url(r'^author/(?P<author_id>[0-9]+)/edit_author/$', views.edit_author, name='edit_author'),
     url(r'^book/(?P<book_id>[0-9]+)/add_book_to_favorites/$', views.add_book_to_favorites, name='add_to_favorites'),
+    url(r'^book/(?P<book_id>[0-9]+)/remove_book_from_favorites/$', views.remove_book_from_favorites, name='remove_from_favorites'),
 ]

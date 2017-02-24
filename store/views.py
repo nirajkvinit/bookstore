@@ -174,7 +174,21 @@ def add_book_to_favorites(request, book_id):
             current_user = User.objects.get(id=auth.get_user(request).id)
             current_book.favorite_by.add(current_user.profile)
             current_book.save()
-            print('its okay, book appllied to favorites')
+            return redirect("/store/book/" + book_id + "")
+        except:
+            return redirect('/oops/')
+
+
+@login_required
+def remove_book_from_favorites(request, book_id):
+    current_book = Book.objects.get(id=book_id)
+    if request.user.is_authenticated():
+        try:
+            current_user = User.objects.get(id=auth.get_user(request).id)
+            # current_user.favorites.filter(book_id=book_id).delete()
+            # current_user.save()
+            current_book.favorite_by.remove(current_user.profile)
+            current_book.save()
             return redirect("/store/book/" + book_id + "")
         except:
             return redirect('/oops/')
