@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'star_ratings',
+    'imagekit',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -140,6 +141,9 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_ROOT = '/home/nick/myprojects/bookstore/media/'
+MEDIA_URL = '/media/'
 # try:
     # from bookstore.settings_heroky import *
 # except ImportError:

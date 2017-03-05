@@ -7,6 +7,7 @@ from django.dispatch import receiver
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, related_name='profile', on_delete=models.CASCADE)
+    avatar = models.ImageField(upload_to='media/avatars/')
     bio = models.CharField(max_length=500)
     # avatar = models.ImageField()
     favorites = models.ManyToManyField(Book, related_name='favorite_by')

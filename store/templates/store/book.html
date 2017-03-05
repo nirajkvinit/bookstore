@@ -3,6 +3,7 @@
 {% load ratings %}
     <h1>Book's page</h1>
     <h3>{{ book.name }}</h3>
+    <h3><img src="{{ book.coverpic_small.url}}"></h3>
     {% if book in user.profile.favorites.all %}
         <h6><a href="{% url "remove_from_favorites" book.id%}">Favorited!</a></h6>
     {% else %}
