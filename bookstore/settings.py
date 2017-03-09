@@ -141,8 +141,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_ROOT = '/home/nick/myprojects/bookstore/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = '/home/nick/myprojects/bookstore/media/'
 MEDIA_URL = '/media/'
 # try:
     # from bookstore.settings_heroky import *

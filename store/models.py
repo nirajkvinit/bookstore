@@ -38,7 +38,7 @@ class Book(models.Model):
         return os.path.join("images/covers", filename)
 
     name = models.CharField(max_length=200)
-    coverpic = models.ImageField(upload_to=get_file_path, default='images/default_book_pic.png')
+    coverpic = models.ImageField(upload_to='images/', default='images/default_book_pic.png')
     coverpic_small = ImageSpecField(source='coverpic', processors=[ResizeToFill(100, 100)], format='JPEG', options={'quality': 60})
     pub_date = models.DateField()           # publication date NEED CHANGE FOR ONLY YEARt
     approve_date = models.DateTimeField(auto_now_add=True)      # date of applying book on this site
