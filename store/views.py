@@ -54,7 +54,7 @@ def add_book(request):
     params['action'] = "/store/add_book/"
     params['button_value'] = "Create Book"
     if request.POST:
-        newbook_form = BookForm(request.POST)
+        newbook_form = BookForm(request.POST, request.FILES)
         if newbook_form.is_valid():
             newbook_form.save()
             return redirect('/')
@@ -112,7 +112,7 @@ def edit_book(request, book_id):
     params['action'] = "/store/book/" + book_id + "/edit_book/"
     params['button_value'] = "Update Book"
     if request.POST:
-        editbook_form = BookForm(request.POST, instance=params['book'])
+        editbook_form = BookForm(request.POST, request.FILES, instance=params['book'])
         if editbook_form.is_valid():
             editbook_form.save()
             return redirect("/store/book/" + book_id + "")
