@@ -1,8 +1,8 @@
-from django import forms
-from loginsys.models import UserProfile
+from django.forms import ModelForm
+from .models import UserProfile
 
 
-class UserProfileForm(forms.ModelForm):
+class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['profile_name']
+        fields = ['avatar', 'bio']

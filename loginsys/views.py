@@ -4,6 +4,7 @@ from django.core.context_processors import csrf
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from .forms import UserProfileForm
 
 
 def login(request):
@@ -57,3 +58,23 @@ def user_page(request):
     current_user = User.objects.get(id=auth.get_user(request).id)
     params['favorite_books'] = current_user.profile.favorites.all()
     return render(request, template_name='loginsys/userpage.html', context=params)
+
+
+@login_required
+def edit_user_profile(request):
+    params = {}
+    params.update(csrf(request))
+    current_user = User.objects.get(id=auth.get_user(request).id)
+    params['form'] = UserProfileForm(instance=current_user.profile)
+
+    if request.POST:
+        edit_user_profile_form = UserProfileForm(request.POST, request.FILES, instance=current_user.profile)
+        if edit_user_profile_form.is_valid():
+            edit_user_profile_form.save()
+            return redirect("/auth/account/")
+        else:
+            params['form'] = edit_user_profile_form
+    else:
+        return render(request,
+                      template_name='loginsys/edit_user_profile.html',
+                      context=params)
