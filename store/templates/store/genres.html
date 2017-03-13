@@ -1,8 +1,9 @@
 {% extends 'base.html' %}
 {% block store %}
-    <h1>All books</h1>
+    <h1>All Genres</h1>
 		{% for genre in genres %}
-        <h3><a href="{% url "books_by_genre" genre.id %}">{{ genre.name }}</a></h3>
-			<hr>
+            <h3><a href="{% url "books_by_genre" genre.id %}">{{ genre.name }}</a></h3>
+            <h6><a href="{% url "book_by_id" genre.get_last_book.id %}">{{ genre.get_last_book.name }}</a></h3>
+            <hr>
 		{% endfor %}
 {% endblock %}
