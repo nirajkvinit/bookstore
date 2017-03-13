@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block store %}
+    <h1>All books</h1>
+		{% for genre in genres %}
+        <h3><a href="{% url "books_by_genre" genre.id %}">{{ genre.name }}</a></h3>
+			<hr>
+		{% endfor %}
+{% endblock %}

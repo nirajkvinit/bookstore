@@ -38,6 +38,12 @@ def books_by_author(request, author_id):
     return render(request, template_name='store/author.html', context=params)
 
 
+def genres(request):
+    params = {}
+    params['genres'] = Genre.objects.all()
+    return render(request, template_name='store/genres.html', context=params)
+
+
 def all_books(request):
     params = {}
     params['books'] = Book.objects.order_by('-approve_date')
