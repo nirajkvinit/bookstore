@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     url(r'^$', views.all_books, name='store'),
     url(r'^book/(?P<book_id>[0-9]+)$', views.book_by_id, name='book_by_id'),
+    # url(r'^book/(?P<book_id>[0-9]+)$', views.book_by_id, name='slug_book_by_id'),
     url(r'^book/(?P<book_id>[0-9]+)/edit_book/$', views.edit_book, name='edit_book'),
     url(r'^book/(?P<pk>[0-9]+)/delete_book/$', views.DeleteBook.as_view(), name='book_delete'),
     url(r'^add_book/$', views.add_book, name='add_book'),
