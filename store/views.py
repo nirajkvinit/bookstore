@@ -24,6 +24,13 @@ def book_by_id(request, book_id):
     return render(request, template_name='store/book.html', context=params)
 
 
+def book_by_slug(request, slug):
+    params = {}
+    params['book'] = Book.objects.select_related().get(slug=slug)
+    params['votes_variants'] = range(1, 6)
+    return render(request, template_name='store/book.html', context=params)
+
+
 def books_by_genre(request, genre_id):
     params = {}
     params['genre'] = Genre.objects.get(id=genre_id)

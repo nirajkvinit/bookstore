@@ -60,9 +60,9 @@ class Book(models.Model):
     coverpic_small = ImageSpecField(source='coverpic',
                                     processors=[ResizeToFill(100, 100)],
                                     format='JPEG', options={'quality': 60})
-    pub_date = models.SmallIntegerField(choices=YEAR_CHOICES, default=1900)
+    pub_date = models.IntegerField(choices=YEAR_CHOICES, default=1900)
     approve_date = models.DateTimeField(auto_now_add=True)
     genre = models.ForeignKey(Genre, related_name='books',
                               on_delete=models.PROTECT)
     author = models.ForeignKey(Author, on_delete=models.PROTECT)
-    slug = models.SlugField()
+    slug = models.SlugField(default='slug')
