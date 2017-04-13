@@ -6,7 +6,7 @@
             <h3>Last 10 books</h3><br>
             <a href="{% url "add_book" %}">Add new book</a>
 		{% for book in books %}
-            <h4><a href="{% url "book_by_id" book.id %}">{{ book.name }}</a></h4>
+            <h4><a href="{% url "book_by_slug" book.slug %}">{{ book.name }}</a></h4>
 			<hr>
 		{% endfor %}
         </div>
