@@ -15,7 +15,12 @@ class Genre(models.Model):
     def get_last_book(self):
         return self.books.order_by('-approve_date')[0]
 
+    def save(self, *args, **kwargs):
+        self.slug = '%s' % (slugify(self.name))
+        super(Genre, self).save(*args, **kwargs)
+
     name = models.CharField(max_length=200)
+    slug = models.SlugField(default='slug')
 
 
 class Author(models.Model):

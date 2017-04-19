@@ -15,6 +15,7 @@ urlpatterns = [
     # Genres
     url(r'^genres/$', views.genres, name='genres'),
     url(r'^genre/(?P<genre_id>[0-9]+)$', views.books_by_genre, name='books_by_genre'),
+    url(r'^genre/(?P<slug>[a-z0-9/-]+)$', views.books_by_genre_slug, name='books_by_genre_slug'),
     # Author
     url(r'^author/(?P<author_id>[0-9]+)$', views.books_by_author, name='books_by_author'),
     # url(r'^author/(?P<slug>[a-z0-9/-]+)$', views.books_by_author_slug, name='books_by_author_slug'),

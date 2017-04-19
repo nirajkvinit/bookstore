@@ -34,7 +34,12 @@ def book_by_slug(request, slug):
 def books_by_genre(request, genre_id):
     params = {}
     params['genre'] = Genre.objects.get(id=genre_id)
-    params['books'] = Book.objects.filter(genre=genre_id)
+    return render(request, template_name='store/genre.html', context=params)
+
+
+def books_by_genre_slug(request, slug):
+    params = {}
+    params['genre'] = Genre.objects.get(slug=slug)
     return render(request, template_name='store/genre.html', context=params)
 
 
@@ -128,7 +133,7 @@ def edit_book(request, book_id):
         editbook_form = BookForm(request.POST, request.FILES, instance=params['book'])
         if editbook_form.is_valid():
             editbook_form.save()
-            return redirect("/store/book/" + book_id + "")
+            return redirect("/store/book/" + params['book'].slug + "")
         else:
             params['form'] = editbook_form
     else:
@@ -170,7 +175,7 @@ def edit_genre(request, genre_id):
         editgenre_form = GenreForm(request.POST, instance=params['genre'])
         if editgenre_form.is_valid():
             editgenre_form.save()
-            return redirect("/store/genre/" + genre_id + "")
+            return redirect("/store/genre/" + params['genre'].slug + "")
         else:
             params['form'] = editgenre_form
     else:
