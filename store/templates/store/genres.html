@@ -2,7 +2,7 @@
 {% block store %}
     <h1>All Genres</h1>
 		{% for genre in genres %}
-            <h3><a href="{% url "books_by_genre" genre.id %}">{{ genre.name }}</a></h3>
+            <h3><a href="{% url "books_by_genre_slug" genre.slug %}">{{ genre.name }}</a></h3>
             <h6>This Genre contains {{ genre.books.count }} books</h6>
             <h6><a href="{% url "book_by_slug" genre.get_last_book.slug %}">{{ genre.get_last_book.name }}</a></h3>
             <hr>

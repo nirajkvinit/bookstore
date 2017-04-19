@@ -22,7 +22,7 @@
             <h3><a href="{% url "genres" %}">Genres</a></h3><br>
             <a href="{% url "add_genre" %}">Add new genre</a>
 		{% for genre in genres %}
-            <h4><a href="{% url "books_by_genre" genre.id %}">{{ genre.name }}</a></h4>
+            <h4><a href="{% url "books_by_genre_slug" genre.slug %}">{{ genre.name }}</a></h4>
 			<hr>
 		{% endfor %}
         </div>
